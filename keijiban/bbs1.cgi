@@ -11,17 +11,18 @@ print <<EOL;
 <html>
 <body>
 <h2>一行掲示板</h2>
-<form method="post" action="bbs1.cgi">
+<form method="post" action="bbs1.cgi">  
 メッセージ：<input type="text" name="message" size="60">
 <input type="submit" value="送信">
 </form>
 <hr>
 EOL
+#actionでbbs1.cgiをもう一度実行する（送信ボタンを押したとき）
 
-&ReadParse(*form);
+&ReadParse(*form);  #多分cgi-libの組み込まれてる関数なんだろう
 
 # フォームの値を取得
-$message = $form{"message"};
+$message = $form{"message"};  #多分15行目のnameで定義されたフォームのやつなんだと思う。変数に代入しているのは利便性のためみたい
 
 # ログファイル読み込み
 open(IN, "bbs1.txt");
