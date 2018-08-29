@@ -37,15 +37,17 @@ if ($message ne "") {
   $namae =~ s/>/&gt;/g;
   $message =~ s/</&lt;/g;
   $message =~ s/>/&gt;/g;
+#フォームから送られてきたタグの<と>を右のに変える
 
   # ログ先頭に名前とメッセージを格納
   unshift @log, "$namae\t$message\n";
 
   # ログファイルにロックをかけて書き込み
-  open(OUT, "+< bbs2.txt");
-  flock(OUT, 2);
+  open(OUT, "+< bbs2.txt"); #+<で読み書きどちらものモードでオープンできる
+  flock(OUT, 2);  #ファイルロック
   truncate(OUT, 0);
   seek(OUT, 0, 0);
+#ファイルのサイズを０にする？？？？？？？？？？？ロックするときに必要な工程らしい
   print OUT @log;
   close(OUT);
 }
